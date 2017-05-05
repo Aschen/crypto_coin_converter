@@ -11,6 +11,14 @@ export default class CurrencyAutocomplete extends Component {
     }
   }
 
+  getItems() {
+    const items = this.props.availables_currencies.filter((currency) => {
+      return this.matchCurrencyToTerm(currency, this.state.value)
+    }).slice(0, 10)
+
+    return items
+  }
+
   sortCurrencies(a, b, value) {
     const aLower = a.CoinName.toLowerCase()
     const bLower = b.CoinName.toLowerCase()
@@ -63,7 +71,7 @@ export default class CurrencyAutocomplete extends Component {
         <Autocomplete
           value={this.state.value}
           inputProps={{ placeholder: "Type here to add currency", name: 'currency', id: 'currencies-autocomplete' }}
-          items={this.props.availables_currencies}
+          items={this.getItems()}
           getItemValue={(item) => item.CoinName}
           shouldItemRender={(currency, value) => this.matchCurrencyToTerm(currency, value)}
           onChange={(event, value) => this.setState({ value })}
