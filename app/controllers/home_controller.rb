@@ -13,9 +13,8 @@ class HomeController < ApplicationController
 
     @availables_currencies = parsed_body["Data"].map do |(_, currency)|
       begin
-        currency["ImageUrl"] = ActionController::Base.helpers.image_url(currency['Name'])
+        currency["ImageUrl"] = ActionController::Base.helpers.image_url("coins/#{currency['Name']}.png")
       rescue Sprockets::Rails::Helper::AssetNotFound
-        currency["ImageUrl"] = ""
       end
       currency["Url"] = "https://www.cryptocompare.com#{currency["Url"]}"
       currency

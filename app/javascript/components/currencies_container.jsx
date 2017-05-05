@@ -39,7 +39,7 @@ export default class CurrenciesContainer extends Component {
   refreshRates() {
     const currencies_codes = this.state.currencies.map((currency) => currency.code).join(',')
     const url = `https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=${currencies_codes}`
-    console.log(url)
+
     fetch(url).then((response) => response.json())
     .then((json) => {
       this.setState({
